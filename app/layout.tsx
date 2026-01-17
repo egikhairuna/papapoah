@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Anti Gravity Agency | Modern Frontend Experiences",
-  description: "We build modern, floating, and high-performance web experiences.",
+  title: "Papapoah | Agency",
+  description: "We bring together the best and brightest in stills and motion shoots; pioneering creative, talent, location, and casting specialists.",
 };
 
 export default function RootLayout({
