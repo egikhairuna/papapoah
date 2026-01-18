@@ -19,9 +19,12 @@ const FeatureCard = ({ title, description, icon }: FeatureCardProps) => (
 const About = () => {
   return (
     <SectionWrapper id="about" className="bg-white/50">
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <p className="text-lg text-gray-500">
+      <div className="text-center w-full mx-auto mb-16">
+        <p className="text-lg text-black">
           We bring together the best and brightest in stills and motion shoots; pioneering creative, talent, location, and casting specialists.
+          We are a Content Creation Studios where your imagination meets expertise and creativity knows no bounds. We work with brands and agencies to create meaningful work with a team of like-minded individuals.
+
+Our constant pursuit involves discovering new approaches to bring ideas to life, address challenges, and craft compelling narratives. Ultimately, our goal is to challenge conventional norms and surprise the audience with fresh perspectives, and having fun while doing so.
         </p>
       </div>
     </SectionWrapper>
