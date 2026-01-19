@@ -35,14 +35,10 @@ const Hero = () => {
       <div className="pt-40 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
         <div className="flex-1 space-y-8 animate-fade-in-up">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
-            A Collective <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
-              Agency
-            </span>{" "}
-            <br />
+            Vision Becomes Visual Impact
           </h1>
           <p className="text-xl text-white max-w-lg leading-relaxed font-medium">
-            A collective of production, artist representation + creative direction. Creating motion & stills content for fashion,
+            We build visual campaigns for fashion, Brand identity, and E-Commerce Solutions
           </p>
           <div className="flex flex-wrap gap-4 pt-4">
             <Link
