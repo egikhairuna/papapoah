@@ -36,10 +36,12 @@ const Navbar = () => {
           className="relative h-10 w-32 md:w-40"
         >
           <Image
-            src="/logo.png"
+            src="/logo.svg"
             alt="Papapoah"
             fill
-            className="object-contain object-left"
+            className={`object-contain object-left transition-all duration-300 ${
+              isScrolled ? "brightness-0" : "brightness-0 invert"
+            }`}
             priority
           />
         </Link>
@@ -48,7 +50,9 @@ const Navbar = () => {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors hover:-translate-y-0.5 transform inline-block"
+              className={`text-sm font-medium transition-all duration-300 hover:text-indigo-600 hover:-translate-y-0.5 transform inline-block ${
+                isScrolled ? "text-gray-600" : "text-white"
+              }`}
             >
               {link.name}
             </Link>

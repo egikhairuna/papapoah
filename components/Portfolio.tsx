@@ -1,6 +1,9 @@
+"use client";
+
 import SectionWrapper from "./SectionWrapper";
 import Link from "next/link";
 import Image from "next/image";
+import { useRef, useState } from "react";
 
 interface PortfolioItem {
   id: number;
@@ -14,13 +17,14 @@ interface VideoItem {
   title: string;
   category: string;
   videoUrl: string;
+  thumbnail: string;
 }
 
 const videoItems: VideoItem[] = [
-  { id: 1, title: "Maternal Disaster x James Boogie", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Maternal-Disaster.mp4" },
-  { id: 2, title: "Moxie Teaser", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Moxie.mp4" },
-  { id: 3, title: "Rhaya Flicks", category: "3d Motion", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/Bumper-Rhaya-10-Silver-Version.mp4" },
-  { id: 4, title: "Moxie Teaser", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Moxie.mp4" },
+  { id: 1, title: "Maternal Disaster x James Boogie", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Maternal-Disaster.mp4", thumbnail: "/portofolio/Vid-1.jpg" },
+  { id: 2, title: "Moxie Teaser", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Moxie.mp4", thumbnail: "/portofolio/Artwork-1-2.jpg" },
+  { id: 3, title: "Rhaya Flicks", category: "3d Motion", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/Bumper-Rhaya-10-Silver-Version.mp4", thumbnail: "/portofolio/Blithe_Story-4.jpg" },
+  { id: 4, title: "Moxie Teaser", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Moxie.mp4", thumbnail: "/portofolio/Blithe_JacketGreen2-1.jpg" },
 ];
 
 const websiteItems: PortfolioItem[] = [
@@ -41,6 +45,63 @@ const portfolioItems: PortfolioItem[] = [
   { id: 9, title: "Motion Preview", category: "Video Stills", image: "/portofolio/Vid-1.jpg" },
 ];
 
+const VideoCard = ({ item }: { item: VideoItem }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(e => console.log("Autoplay prevented", e));
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  return (
+    <div 
+      className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 ease-in-out hover:-translate-y-2"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="aspect-video relative overflow-hidden bg-gray-100">
+         <video 
+            ref={videoRef}
+            src={item.videoUrl} 
+            poster={item.thumbnail}
+            muted 
+            loop
+            playsInline
+            preload="metadata"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+         >
+           Your browser does not support the video tag.
+         </video>
+         {/* Play Indicator Overlay */}
+         <div className={`absolute inset-0 bg-black/20 flex items-center justify-center transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
+            <div className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center backdrop-blur-sm">
+                <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[12px] border-l-white border-b-[8px] border-b-transparent ml-1" />
+            </div>
+         </div>
+      </div>
+      <div className="p-6">
+          <span className="text-xs font-semibold tracking-wider text-indigo-600 uppercase mb-2 block">
+            {item.category}
+          </span>
+          <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
+            {item.title}
+          </h3>
+      </div>
+    </div>
+  );
+};
+
 const Portfolio = () => {
   return (
     <SectionWrapper id="works">
@@ -56,25 +117,7 @@ const Portfolio = () => {
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         {videoItems.map((item) => (
-          <div key={item.id} className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 ease-in-out hover:-translate-y-2">
-            <div className="aspect-video relative overflow-hidden bg-gray-100">
-               <video 
-                  src={item.videoUrl} 
-                  controls 
-                  className="w-full h-full object-cover"
-               >
-                 Your browser does not support the video tag.
-               </video>
-            </div>
-            <div className="p-6">
-                <span className="text-xs font-semibold tracking-wider text-indigo-600 uppercase mb-2 block">
-                  {item.category}
-                </span>
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
-                  {item.title}
-                </h3>
-            </div>
-          </div>
+          <VideoCard key={item.id} item={item} />
         ))}
       </div>
 
