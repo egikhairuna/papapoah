@@ -1,33 +1,47 @@
+"use client";
+
+import { useRef } from "react";
 import SectionWrapper from "./SectionWrapper";
 import Link from "next/link";
-import Image from "next/image";
 
 const Hero = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current && videoRef.current.currentTime >= 10) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
+    }
+  };
   return (
     <SectionWrapper id="home" className="pt-32 pb-20 md:pt-48 md:pb-32 relative overflow-hidden h-[100vh]">
-        {/* Background Image */}
+        {/* Background Video */}
         <div className="absolute inset-0 z-0">
-            <Image 
-                src="/hero.jpg" 
-                alt="Hero Background" 
-                fill 
-                className="object-cover"
-                priority
-            />
+            <video 
+                ref={videoRef}
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                onTimeUpdate={handleTimeUpdate}
+                className="w-full h-full object-cover"
+            >
+                <source src="/hero-video.mp4" type="video/mp4" />
+            </video>
             {/* Overlay for text readability - keep it light for the light theme */}
-            <div className="absolute inset-0 bg-white/40"></div>
+            <div className="absolute inset-0 bg-black/40"></div>
         </div>
 
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
         <div className="flex-1 space-y-8 animate-fade-in-up">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1]">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
             A Collective <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
               Agency
             </span>{" "}
             <br />
           </h1>
-          <p className="text-xl text-gray-800 max-w-lg leading-relaxed font-medium">
+          <p className="text-xl text-white max-w-lg leading-relaxed font-medium">
             A collective of production, artist representation + creative direction. Creating motion & stills content for fashion,
           </p>
           <div className="flex flex-wrap gap-4 pt-4">
