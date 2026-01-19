@@ -17,14 +17,13 @@ interface VideoItem {
   title: string;
   category: string;
   videoUrl: string;
-  thumbnail: string;
 }
 
 const videoItems: VideoItem[] = [
-  { id: 1, title: "Maternal Disaster x James Boogie", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Maternal-Disaster.mp4", thumbnail: "/portofolio/Vid-1.jpg" },
-  { id: 2, title: "Moxie Teaser", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Moxie.mp4", thumbnail: "/portofolio/Artwork-1-2.jpg" },
-  { id: 3, title: "Rhaya Flicks", category: "3d Motion", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/Bumper-Rhaya-10-Silver-Version.mp4", thumbnail: "/portofolio/Blithe_Story-4.jpg" },
-  { id: 4, title: "Moxie Teaser", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Moxie.mp4", thumbnail: "/portofolio/Blithe_JacketGreen2-1.jpg" },
+  { id: 1, title: "Maternal Disaster x James Boogie", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Maternal-Disaster.mp4" },
+  { id: 2, title: "Moxie Teaser", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Moxie.mp4" },
+  { id: 3, title: "Rhaya Flicks", category: "3d Motion", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/Bumper-Rhaya-10-Silver-Version.mp4" },
+  { id: 4, title: "Moxie Teaser", category: "Campaign", videoUrl: "https://mychaircuts.id/wp-content/uploads/2026/01/James-Boogie-Moxie.mp4" },
 ];
 
 const websiteItems: PortfolioItem[] = [
@@ -52,6 +51,7 @@ const VideoCard = ({ item }: { item: VideoItem }) => {
   const handleMouseEnter = () => {
     setIsHovered(true);
     if (videoRef.current) {
+      videoRef.current.currentTime = 0;
       videoRef.current.play().catch(e => console.log("Autoplay prevented", e));
     }
   };
@@ -60,7 +60,15 @@ const VideoCard = ({ item }: { item: VideoItem }) => {
     setIsHovered(false);
     if (videoRef.current) {
       videoRef.current.pause();
-      videoRef.current.currentTime = 0;
+      // Reset back to middle frame after a small delay to ensure smooth transition
+      videoRef.current.currentTime = videoRef.current.duration / 2 || 0;
+    }
+  };
+
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      // Seek to the middle of the video for the thumbnail
+      videoRef.current.currentTime = videoRef.current.duration / 2 || 0;
     }
   };
 
@@ -74,7 +82,7 @@ const VideoCard = ({ item }: { item: VideoItem }) => {
          <video 
             ref={videoRef}
             src={item.videoUrl} 
-            poster={item.thumbnail}
+            onLoadedMetadata={handleLoadedMetadata}
             muted 
             loop
             playsInline
