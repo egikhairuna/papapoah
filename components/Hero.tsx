@@ -34,8 +34,8 @@ const Hero = () => {
 
       <div className="pt-40 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
         <div className="flex-1 space-y-8 animate-fade-in-up">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
-            Vision Becomes Visual Impact
+          <h1 className="text-4xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
+            When Vision Becomes Visual Impact
           </h1>
           <p className="text-xl text-white max-w-lg leading-relaxed font-medium">
             We build visual campaigns for fashion, Brand identity, and E-Commerce Solutions

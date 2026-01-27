@@ -26,18 +26,21 @@ const Clients = () => {
          <div className="w-16 h-1 bg-indigo-600 mx-auto rounded-full"></div>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 md:gap-12 items-center opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-        {clients.map((client) => (
-          <div key={client.id} className="flex justify-center items-center p-4 hover:scale-110 transition-transform duration-300">
-            <div className="relative w-24 h-12 md:w-32 md:h-16">
-              <img
-                src={client.logo}
-                alt={client.name}
-                className="w-full h-full object-contain"
-              />
+      <div className="overflow-hidden relative">
+        <div className="flex w-fit items-center gap-12 md:gap-24 animate-marquee-ltr opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+          {/* Double the logos to create the seamless loop effect */}
+          {[...clients, ...clients].map((client, index) => (
+            <div key={`${client.id}-${index}`} className="flex-shrink-0 flex justify-center items-center p-4 hover:scale-110 transition-transform duration-300">
+              <div className="relative w-24 h-12 md:w-32 md:h-16">
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="w-full h-full object-contain"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </SectionWrapper>
   );

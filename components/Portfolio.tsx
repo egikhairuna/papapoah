@@ -74,7 +74,7 @@ const VideoCard = ({ item }: { item: VideoItem }) => {
 
   return (
     <div 
-      className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 ease-in-out hover:-translate-y-2"
+      className="group relative bg-white overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 ease-in-out hover:-translate-y-2"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -112,8 +112,8 @@ const VideoCard = ({ item }: { item: VideoItem }) => {
 
 const Portfolio = () => {
   return (
-    <SectionWrapper id="works">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+    <SectionWrapper id="works" className="px-0 md:px-12 lg:px-24">
+      <div className="flex flex-col md:flex-row justify-between items-end mb-12 px-6 md:px-0">
         <div>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">Selected Works</h2>
           <p className="text-gray-500 text-lg">A collection of our latest productions.</p>
@@ -123,17 +123,17 @@ const Portfolio = () => {
         </Link>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 mb-12">
+      <div className="grid md:grid-cols-2 gap-0 md:gap-8 mb-12">
         {videoItems.map((item) => (
           <VideoCard key={item.id} item={item} />
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0 md:gap-8 mb-12">
         {websiteItems.map((item) => (
           <div
             key={item.id}
-            className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 ease-in-out hover:-translate-y-2"
+            className="group relative bg-white overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 ease-in-out hover:-translate-y-2"
           >
             <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
               <img
@@ -155,11 +155,11 @@ const Portfolio = () => {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0 md:gap-8">
         {portfolioItems.map((item) => (
           <div
             key={item.id}
-            className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 ease-in-out hover:-translate-y-2"
+            className="group relative bg-white overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 ease-in-out hover:-translate-y-2"
           >
             <div className="aspect-[4/5] relative overflow-hidden bg-gray-100">
               <Image
@@ -183,7 +183,7 @@ const Portfolio = () => {
         ))}
       </div>
       
-      <div className="mt-8 text-center md:hidden">
+      <div className="mt-8 text-center md:hidden px-6">
          <Link href="#" className="text-indigo-600 font-medium hover:text-indigo-800 transition-colors">
             View All Projects &rarr;
         </Link>
